@@ -1,5 +1,5 @@
 import numpy as np
-#create L and U matrices with all elemets as zero
+#create L matrices with all elemets as zero
 L=np.array([[0.0 for i in range(3)]for j in range(3)])
 
 #assume Lii=1 all diagonal elements in L matrix as 1
@@ -32,6 +32,25 @@ if np.array_equal(A,B):
                 for k in range(i):
                     temp=temp-(L[i][k]*L[j][k])
                 L[i][j]=temp/L[i][i]
-
+print("Lower Triangular Matrix")
 print(L)
-
+print("Upper Triangular Matrix")
+LT=L.transpose()
+print(LT)
+#forward substitution
+z=np.zeros(len(b))
+for i in range(0,len(b),1):
+    temp=b[i]
+    for j in range(i):
+        temp=temp-(L[i][j]*z[j])
+    z[i]=temp/L[i][i]
+z=z.transpose()
+#backward substitution
+x=np.zeros(len(b))
+for i in range(n-1,-1,-1):
+    temp=z[i]
+    for j in range(n-1,i,-1):
+        temp=temp-LT[i][j]*x[j]
+    x[i]=temp/LT[i][i]
+print("Solution to the linear system of equations:")
+print(x)
