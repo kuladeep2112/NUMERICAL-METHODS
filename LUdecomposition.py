@@ -1,13 +1,15 @@
 import numpy as np
 from numpy.lib.twodim_base import eye
 #create L and U matrices with all elemets as zero
-L=np.array([[0 for i in range(3)]for j in range(3)])
-U=np.array([[0 for i in range(3)]for j in range(3)])
+L=np.array([[0.0 for i in range(4)]for j in range(4)])
+U=np.array([[0.0 for i in range(4)]for j in range(4)])
 #assume Lii=1 all diagonal elements in L matrix as 1
-A=np.array([[1,-1,5],[2,-3,1],[1,3,7]])
-b=np.array([[5,0,11]])
-b.shape=(3,1)
-n=3
+# A=np.array([[1,-1,5],[2,-3,1],[1,3,7]])
+# b=np.array([[5,0,11]])
+A=np.array([[3.5,2.77,-0.76,1.8],[-1.8,2.68,3.44,-0.09],[0.27,5.07,6.9,1.61],[1.71,5.45,2.68,1.71]])
+b=np.array([7.31,4.23,13.85,11.55])
+b=b.transpose()
+n=4
 
 for i in range(n):
     #L triangular matrix
@@ -60,3 +62,4 @@ for i in range(n-1,-1,-1):
     x[i]=temp/U[i][i]
 print("Solution to the linear system of equations:")
 print(x)
+print(np.matmul(A,x))
